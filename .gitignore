@@ -30,4 +30,7 @@ out/
 *.safetensors
 checkpoints/
 
+# scratch: agent output, bundles from other projects - never commit
+Claude outputs/
+
 .DS_Store
