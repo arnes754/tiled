@@ -1,0 +1,18 @@
+# Optional. The renderer needs none of this; it is here for when the API
+# starts persisting catalogue and sessions.
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: tilevis
+      POSTGRES_PASSWORD: tilevis
+      POSTGRES_DB: tilevis
+    ports: ["5432:5432"]
+    volumes: ["pgdata:/var/lib/postgresql/data"]
+
+  queue:
+    image: valkey/valkey:8-alpine
+    ports: ["6379:6379"]
+
+volumes:
+  pgdata:

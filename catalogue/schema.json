@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Tile SKU",
+  "type": "object",
+  "required": ["sku", "name", "size_mm", "textures", "use"],
+  "properties": {
+    "sku": { "type": "string" },
+    "name": { "type": "string" },
+    "collection": { "type": "string" },
+    "finish": { "enum": ["matte", "gloss", "polished", "structured"] },
+    "size_mm": {
+      "type": "array", "items": { "type": "number" }, "minItems": 2, "maxItems": 2,
+      "description": "Nominal face size. Must match the texture aspect ratio."
+    },
+    "thickness_mm": { "type": "number" },
+    "rectified": { "type": "boolean", "description": "Rectified edges take a tighter grout line." },
+    "textures": {
+      "type": "array", "items": { "type": "string" }, "minItems": 1,
+      "description": "Seamless, colour-calibrated, flat-lit. 4-8 shade variants for natural looks, or the field visibly repeats."
+    },
+    "normal_map": { "type": "string" },
+    "gloss": { "type": "number", "minimum": 0, "maximum": 1 },
+    "grout_default": {
+      "type": "object",
+      "properties": { "width_mm": { "type": "number" }, "color": { "type": "string" } }
+    },
+    "patterns": { "type": "array", "items": { "enum": ["stack", "running_half", "running_third", "herringbone", "basketweave"] } },
+    "use": { "type": "array", "items": { "enum": ["floor", "wall"] } },
+    "price_per_m2": { "type": "number" },
+    "per_box": { "type": "number" },
+    "stock": { "type": "number" },
+    "source_url": { "type": "string" }
+  }
+}

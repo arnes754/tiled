@@ -1,0 +1,16 @@
+{
+  "sku": "EXAMPLE-600-MATTE",
+  "name": "Example Matte Porcelain 600x600",
+  "collection": "Test",
+  "finish": "matte",
+  "size_mm": [600, 600],
+  "thickness_mm": 9,
+  "rectified": true,
+  "textures": ["textures/example/variant-01.jpg"],
+  "gloss": 0.08,
+  "grout_default": { "width_mm": 3, "color": "#C9C4BA" },
+  "patterns": ["stack", "running_half"],
+  "use": ["floor", "wall"],
+  "price_per_m2": 24.9,
+  "per_box": 4
+}

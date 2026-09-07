@@ -1,0 +1,33 @@
+# data: room photos, caches, renders - never commit
+data/
+
+# textures: only sample CC0 files are tracked
+catalogue/textures/*
+!catalogue/textures/.gitkeep
+!catalogue/textures/README.md
+
+# python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+
+# node
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+
+# env
+.env
+.env.local
+
+# models
+*.pth
+*.safetensors
+checkpoints/
+
+.DS_Store
