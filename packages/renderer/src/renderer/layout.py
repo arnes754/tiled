@@ -97,8 +97,25 @@ def variant_for_cell(col: int, row: int, n_variants: int) -> int:
     """
     if n_variants <= 1:
         return 0
-    h = (int(col) * 73856093) ^ (int(row) * 19349663)
-    return h % n_variants
+
+    # Two things matter here and both bite in practice.
+    #
+    # 1. Mix properly. The obvious `(col*p1) ^ (row*p2) % n` looks fine - the
+    #    distribution is perfectly uniform - but the shades still walk
+    #    0,1,2,3,0,1,2,3 straight across every row, because `% n` reads only
+    #    the low bits and those products barely disturb them. On 600mm tiles
+    #    that is a motif repeating every 2.4m. splitmix64's finalizer
+    #    avalanches every input bit into the whole word.
+    # 2. Reduce off the HIGH bits (Lemire), not `% n`. The low bits of any
+    #    multiply-xor hash are the weakest part of it.
+    h = (int(col) * 0x9E3779B97F4A7C15) ^ (int(row) * 0xC2B2AE3D27D4EB4F)
+    h = (h ^ 0x165667B19E3779F9) & 0xFFFFFFFFFFFFFFFF
+    h ^= h >> 30
+    h = (h * 0xBF58476D1CE4E5B9) & 0xFFFFFFFFFFFFFFFF
+    h ^= h >> 27
+    h = (h * 0x94D049BB133111EB) & 0xFFFFFFFFFFFFFFFF
+    h ^= h >> 31
+    return (h * n_variants) >> 64
 
 
 # --- helpers (pure, no I/O) -------------------------------------------------
